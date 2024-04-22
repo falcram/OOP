@@ -5,13 +5,22 @@
 #include "SFTPservice.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 class UserInterface
-{
+{    
+    private:
+    sftp_service_manager *sftp_s;
     public:
 
-    sftp_service sftp_s;
+    UserInterface()
+    {
+       Greeting();
+       sftp_s = new sftp_service_manager();
+    }
 
+    
+    void Greeting();
     void _mainConsole(); 
 
     void ShowFunctions();
@@ -34,7 +43,7 @@ class UserInterface
         "exit"
     };
 
-
+    
 };
 
 #endif // USERINTERFACE_H

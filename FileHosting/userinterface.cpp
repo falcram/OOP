@@ -1,6 +1,7 @@
 #include "userinterface.h"
+#include "stdlib.h"
 #include <iostream>
-
+#define NAME_MAX 255
 void UserInterface::_mainConsole()
 {
     std::cout << "# ___ | Enter \"Functions\" to see all functions | ___" << std::endl;
@@ -35,17 +36,12 @@ void UserInterface::_mainConsole()
         }
         else if( consolestring == "Create Dir" || consolestring == "ctdir")
         {
-            int er = sftp_s.create_ssh_session();
-            if (er == 0)
-            {
-                std::cout << "Complited Sucsessfuly!" << std::endl;
-            }
-            else
-            {
-                std::cout <<"!!!=======ERROR========!!!";
-            }
-            
-
+            char dir_name[NAME_MAX];
+            fgets(dir_name, NAME_MAX, stdin);
+            //printf(dir_name);
+            int er = sftp_s->sftp_create_dir(dir_name);
+            if (er == 0){std::cout << "Complited Sucsessfuly!" << std::endl;}
+            else{std::cout <<"!!!=======ERROR========!!!";}
         }
         else if( consolestring == "Rename Dir" || consolestring == "rndir")
         {
@@ -66,6 +62,24 @@ void UserInterface::_mainConsole()
         else{std::cout << "No such command" << std ::endl;}
     }
     
+}
+
+void UserInterface::Greeting()
+{   
+    system("clear");
+    system("figlet -c FULCRUM FILE HOSTING");
+    /*std::cout <<"             _____      _                              __ _ _      "<< std::endl; 
+    std::cout <<"            |  ___|   _| | ___ _ __ _   _ _ __ ___    / _(_) | ___ "<< std::endl;
+    std::cout <<"            | |_ | | | | |/ __| '__| | | | '_ ` _ \\  | |_| | |/ _ \\"<< std::endl;
+    std::cout <<"            |  _|| |_| | | (__| |  | |_| | | | | | | |  _| | |  __/"<< std::endl;
+    std::cout <<"            |_|   \\__,_|_|\\___|_|   \\__,_|_| |_| |_| |_| |_|_|\\___|"<< std::endl;
+    std::cout <<"                                                                   "<< std::endl;
+    std::cout <<"                       _               _   _                       "<< std::endl;
+    std::cout <<"                      | |__   ___  ___| |_(_)_ __   __ _           "<< std::endl;
+    std::cout <<"                      | '_ \\ / _ \\/ __| __| | '_ \\ / _` |          "<< std::endl;
+    std::cout <<"                      | | | | (_) \\__ \\ |_| | | | | (_| |          "<< std::endl;
+    std::cout <<"                      |_| |_|\\___/|___/\\__|_|_| |_|\\__, |          "<< std::endl;
+    std::cout <<"                                                   |___/           "<< std::endl;*/
 }
 
 void UserInterface::ShowFunctions()
